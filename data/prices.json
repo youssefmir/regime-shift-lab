@@ -1,0 +1,16 @@
+{
+  "source": "Yahoo Finance via yfinance, auto_adjust=True",
+  "tickers": [
+    "SPY",
+    "IEF",
+    "GLD",
+    "SHY"
+  ],
+  "downloaded_at": "2026-11-15T16:48:36.625380+00:00",
+  "requested_end_exclusive": "2026-11-15",
+  "start": "2006-01-03",
+  "end": "2026-11-13",
+  "rows": 5250,
+  "sha256": "03791c46d7067759ff920b012f27ac330d7514db21e890166cef231673322274",
+  "notes": "Adjusted closes include distribution/split adjustments; historical revisions are possible. USD, no FX conversion."
+}
