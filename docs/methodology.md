@@ -29,3 +29,7 @@ Metrics: compound annual growth rate, annualized daily volatility, maximum drawd
 Yahoo Finance adjusted closes downloaded using yfinance. The dated snapshot has a SHA-256 manifest. Adjusted-close execution is a total-return approximation; a production system would model shares, unadjusted opens/closes, splits, distributions and cash separately. ETF expenses are embedded in market returns; no additional management charge. Transaction-cost assumptions are stylized and exclude market impact, taxes, FX, spread changes and cash interest before initial deployment.
 
 The four surviving ETFs and the research question were chosen with hindsight. Correlation is noisy and lagging. Neither current news nor past performance proves tradable alpha. Results are research simulations, not live or guaranteed performance. Market-data redistribution is subject to the provider's terms; only derived research outputs are published, with raw prices kept local.
+
+## Display sampling
+
+The web dashboard uses one observation every five sessions plus the first/last trading day of each year. Full metrics and sensitivity statistics still use every daily observation. The drawdown plot is computed on the displayed sample and may understate intraperiod troughs; use the daily maximum drawdown indicators above it for risk assessment. Run the Python pipeline to regenerate the complete daily paths in `reports/strategy.csv`, `reports/benchmark.csv` and `reports/results.json`.
