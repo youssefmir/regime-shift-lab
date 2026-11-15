@@ -139,8 +139,18 @@ def export(prices, output, site):
                         'weights':{a:float(s.loc[d,f'w_{a}']) for a in ASSETS}} for d in s.index]}
     Path(output).mkdir(parents=True,exist_ok=True); Path(site).mkdir(parents=True,exist_ok=True)
     s.to_csv(Path(output)/'strategy.csv'); b.to_csv(Path(output)/'benchmark.csv')
-    for dest in [Path(output)/'results.json',Path(site)/'results.json']:
-        dest.write_text(json.dumps(payload,ensure_ascii=False,allow_nan=False,separators=(',',':'))+'\n')
+    (Path(output)/'results.json').write_text(json.dumps(payload,ensure_ascii=False,allow_nan=False,separators=(',',':'))+'\n')
+    # Weekly display sample; all statistics above use daily returns.
+    display=dict(payload)
+    display['chart_frequency']='Weekly sample; period boundaries preserved. Daily statistics.'
+    points=payload['series']
+    keep=set(range(0,len(points),5)) | {0,len(points)-1}
+    for i,row in enumerate(points):
+        if i==0 or row['date'][:4] != points[i-1]['date'][:4]: keep.add(i)
+        if i==len(points)-1 or row['date'][:4] != points[i+1]['date'][:4]: keep.add(i)
+    display['compact_series']=[[r['date'],round(r['strategy'],6),round(r['benchmark'],6),None if r['correlation'] is None else round(r['correlation'],5),*[round(r['weights'][a],5) for a in ASSETS]] for i,r in enumerate(points) if i in keep]
+    del display['series']
+    (Path(site)/'results.json').write_text(json.dumps(display,ensure_ascii=False,allow_nan=False,separators=(',',':'))+'\n')
     print(json.dumps(periods,indent=2))
 
 if __name__=='__main__':
