@@ -10,6 +10,8 @@ A reproducible quantitative research project by Youssef Mir, motivated by the IM
 - Tests for future-data leakage, execution timing, turnover fees and invalid prices.
 - TypeSafe Jev 1.14 macro-text classification through the native System One API; probabilities are validated and kept separate from the backtest.
 
+![Regime Shift Lab : résultats de la stratégie et du benchmark 60/40 sur 2022–2026](site/preview.svg)
+
 ## Reproduce (Python 3.12+)
 
 ```sh
@@ -22,7 +24,7 @@ python src/backtest.py
 python -m http.server 8080 --directory site
 ```
 
-Open http://localhost:8080. Downloads stop before the exclusive end date. The snapshot manifest records coverage and hash. Raw vendor prices are intentionally not committed; rerun the download to regenerate them. Derived results are versioned in `site/results.json` and `reports/`.
+Open http://localhost:8080. Downloads stop before the exclusive end date. The snapshot manifest records coverage and hash. Raw vendor prices are intentionally not committed; rerun the download to regenerate them. Derived web results are versioned in `site/results.json`; complete daily reports are regenerated locally in `reports/`.
 
 Read the [research protocol and limitations](docs/methodology.md). This is a retrospective research exercise, with no order execution or brokerage connection. No claim of live alpha, prospective validation or investment recommendation.
 
